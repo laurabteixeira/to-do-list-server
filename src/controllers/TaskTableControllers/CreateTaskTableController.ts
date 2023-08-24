@@ -1,5 +1,4 @@
 import prisma from '../../lib/prisma'
-import redis from '../../lib/redis'
 
 export default async function CreateTaskTableController() {
   try {
