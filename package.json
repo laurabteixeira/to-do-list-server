@@ -1,0 +1,27 @@
+{
+  "name": "todo-list-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^2.1.0",
+    "@types/node": "^20.5.4",
+    "eslint": "^8.47.0",
+    "prisma": "^5.2.0",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.2.0",
+    "fastify": "^4.21.0",
+    "pg": "^8.11.3",
+    "redis": "^4.6.8",
+    "tsx": "^3.12.7",
+    "zod": "^3.22.2"
+  }
+}
