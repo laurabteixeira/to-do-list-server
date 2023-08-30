@@ -1,6 +1,7 @@
 import { FastifyRequest } from 'fastify'
 import prisma from '../../lib/prisma'
 import { z } from 'zod'
+import redis from '../../lib/redis'
 
 export default async function DeleteTaskTableController(
   request: FastifyRequest,
@@ -15,7 +16,7 @@ export default async function DeleteTaskTableController(
     const existingTaskTable = await prisma.taskTable.findUnique({
       where: { id: tableId },
       include: {
-        tasks: true, // Incluir tarefas associadas
+        tasks: true,
       },
     })
 
@@ -30,6 +31,9 @@ export default async function DeleteTaskTableController(
     await prisma.taskTable.delete({
       where: { id: tableId },
     })
+
+    redis.clear('taskTableList')
+
     return { message: 'Table deleted successfully.' }
   } catch (error) {
     console.error(error)

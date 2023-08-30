@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import prisma from '../../lib/prisma'
+import redis from '../../lib/redis'
 
 export async function DeleteTaskController(
   request: FastifyRequest,
@@ -21,7 +22,7 @@ export async function DeleteTaskController(
       })
       .then(() => ({ success: true }))
       .catch(() => ({ success: false }))
-
+    redis.clear('todoList')
     if (!deleteResult.success) {
       return reply.status(422).send()
     }

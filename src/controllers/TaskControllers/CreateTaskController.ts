@@ -1,6 +1,7 @@
 import { FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import prisma from '../../lib/prisma'
+import redis from '../../lib/redis'
 
 export default async function CreateTaskController(request: FastifyRequest) {
   try {
@@ -25,6 +26,7 @@ export default async function CreateTaskController(request: FastifyRequest) {
         taskTableId: tableId,
       },
     })
+    redis.clear('todoList')
 
     return task
   } catch (error) {

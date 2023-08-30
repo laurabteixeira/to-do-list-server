@@ -1,6 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 import prisma from '../../lib/prisma'
+import redis from '../../lib/redis'
 
 export async function UpdateTaskController(
   request: FastifyRequest,
@@ -37,6 +38,7 @@ export async function UpdateTaskController(
     if (!updateResult.success) {
       return reply.status(422).send()
     }
+    redis.clear('todoList')
 
     return updateResult
   } catch (error) {
